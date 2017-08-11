@@ -21,23 +21,23 @@ registerBlockType('dayo/gutenberg-map', {
   category: 'common',
 
   attributes: {
-    location: 'Brooklyn+Bridge,New+York,NY',
-    mapType: 'roadmap',
-    zoom: '13'
+    location: {type: 'string', default: 'Brooklyn+Bridge,New+York,NY'},
+    mapType: {type: 'string', default: 'roadmap'},
+    zoom: {type: 'int', default: 13}
   },
 
   edit: function (props) {
     var location = props.attributes.location || 'Brooklyn+Bridge,New+York,NY',
       mapType = props.attributes.mapType || 'roadmap',
-      zoom = props.attributes.zoom || '13',
+      zoom = props.attributes.zoom || 13,
       focus = props.focus;
 
     function onBlurType(mapType) {
       props.setAttributes({mapType: mapType});
     }
 
-    function onChangeZoom(e) {
-      props.setAttributes({zoom: e.target.value});
+    function onChangeZoom(zoom) {
+      props.setAttributes({zoom: zoom});
     }
 
     function onChangeLocation(loc) {
@@ -47,7 +47,7 @@ registerBlockType('dayo/gutenberg-map', {
     return [
       el('img', {
         className: props.className,
-        src: 'https://maps.googleapis.com/maps/api/staticmap?center=' + location + '&zoom=' + zoom + '&size=600x300&maptype=' + mapType + '&key='+google_api_key
+        src: 'https://maps.googleapis.com/maps/api/staticmap?center=' + location + '&zoom=' + zoom + '&size=600x300&maptype=' + mapType + '&key=' + google_api_key
       }),
       !!focus && el(
         InspectorControls,
@@ -76,8 +76,8 @@ registerBlockType('dayo/gutenberg-map', {
             label: 'Zoom Level',
             value: zoom,
             onChange: onChangeZoom,
-            min: '1',
-            max: '20'
+            min: 1,
+            max: 20
           }
         )
       )
@@ -92,7 +92,7 @@ registerBlockType('dayo/gutenberg-map', {
 
     return el('img', {
       className: props.className,
-      src: 'https://maps.googleapis.com/maps/api/staticmap?center=' + location + '&zoom=' + zoom + '&size=600x300&maptype=' + mapType + '&key='+google_api_key
+      src: 'https://maps.googleapis.com/maps/api/staticmap?center=' + location + '&zoom=' + zoom + '&size=600x300&maptype=' + mapType + '&key=' + google_api_key
     });
   },
 });
