@@ -18,7 +18,7 @@ registerBlockType('dayo/gutenberg-map', {
 
   icon: 'location',
 
-  category: 'layout',
+  category: 'common',
 
   attributes: {
     location: 'Brooklyn+Bridge,New+York,NY',
